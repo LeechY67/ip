@@ -14,96 +14,99 @@ public class BlondeBlazer {
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
 
-            if (line.equals("bye")) {
-                System.out.println(logo);
-                System.out.println("Bye. Hope to see you again soon!");
-                System.out.println(logo);
-                break;
-            }
-
-            else if (line.equals("list")) {
-                if (taskCount == 0) {
-                    System.out.println("Well, I got nothing to list out. Try add something.");
-                }
-
-                else {
-                    System.out.println("Here are the tasks in your list: ");
-                    for (int i = 0; i < taskCount; i++) {
-                        System.out.println((i + 1) + ". " + tasks[i].toString());
+            try {
+                if (line.equals("bye")) {
+                    System.out.println(logo);
+                    System.out.println("Bye. Hope to see you again soon!");
+                    System.out.println(logo);
+                    break;
+                } else if (line.equals("list")) {
+                    if (taskCount == 0) {
+                        System.out.println("Well, I got nothing to list out. Try add something.");
+                    } else {
+                        System.out.println("Here are the tasks in your list: ");
+                        for (int i = 0; i < taskCount; i++) {
+                            System.out.println((i + 1) + ". " + tasks[i].toString());
+                        }
                     }
-                }
-            }
+                } else if (line.startsWith("mark")) {
+                    if (line.length() <= 5) {
+                        throw new Exception("Bro, I don't know what you're gonna mark...");
+                    }
 
-            else if (line.startsWith("mark")) {
-                if (line.length() <= 5) {
-                    System.out.println("Wait, you can't just say mark without giving an actual number!");
-                }
-
-                else {
                     int index = Integer.parseInt(line.substring(5)) - 1;
+
                     tasks[index].mark();
                     System.out.println("Nice, I've marked this task as done!");
                     System.out.println((index + 1) + ". " + tasks[index].toString());
-                }
-            }
 
-            else if (line.startsWith("unmark")) {
-                if (line.length() <= 7) {
-                    System.out.println("Wait, you can't just say unmark without giving an actual number!");
-                }
-
-                else {
+                } else if (line.startsWith("unmark")) {
+                    if (line.length() <= 7) {
+                        throw new Exception("Bro, I don't know what you're gonna unmark...");
+                    }
+                    
                     int index = Integer.parseInt(line.substring(7)) - 1;
                     tasks[index].unmark();
                     System.out.println("OK, I've marked this task as not done yet: ");
                     System.out.println((index + 1) + ". " + tasks[index].toString());
-                }
-            }
 
-            else if (line.startsWith("todo")) {
-                if (line.length() <= 5) {
-                    System.out.println("Wait, you can't just say todo without giving actual things!");
-                }
+                } else if (line.startsWith("todo")) {
+                    if (line.length() <= 5) {
+                        throw new Exception("Wait, you can't just say todo without a clear stuff! State what you're gonna do after todo.");
+                    }
 
-                else {
                     String dex = line.substring(5);
+
+                    if (dex.isEmpty()) {
+                        throw new Exception("Wait, you can't just say todo without a clear stuff! State what you're gonna do after todo.");
+                    }
+
                     tasks[taskCount] = new ToDo(dex);
                     System.out.println("Got it, I've added this task");
                     System.out.println(tasks[taskCount].toString());
                     System.out.println("Now you have " + ++taskCount + " tasks in the list.");
-                }
-            }
 
-            else if (line.startsWith("deadline")) {
-                if (line.length() <= 9) {
-                    System.out.println("Wait, you can't just say deadline without giving actual things!");
-                }
-                else {
+                } else if (line.startsWith("deadline")) {
+                    if (line.length() <= 9) {
+                        throw new Exception("Wait, you can't just say deadline without a clear stuff! State what you're gonna do after deadline.");
+                    }
+
                     String[] parts = line.substring(9).split(" /by ");
+
+                    if (parts[0].isEmpty() || parts[1].isEmpty()) {
+                        throw new Exception("Wait, you can't just say deadline without a clear stuff! State what you're gonna do after deadline.");
+                    }
+
                     tasks[taskCount] = new Deadline(parts[0], parts[1]);
                     System.out.println("Got it, I've added this task");
                     System.out.println(tasks[taskCount].toString());
                     System.out.println("Now you have " + ++taskCount + " tasks in the list.");
-                }
-            }
 
-            else if (line.startsWith("event")) {
-                if (line.length() <= 6) {
-                    System.out.println("Wait, you can't just say event without giving actual things!");
-                }
-                else {
+                } else if (line.startsWith("event")) {
+
+                    if (line.length() <= 6) {
+                        throw new Exception("Wait, you can't just say event without a clear stuff! State what you're gonna do after event.");
+                    }
+
                     String[] parts = line.substring(6).split(" /from ");
                     String dex = parts[0];
                     String[] times = parts[1].split(" /to ");
+
+                    if (dex.isEmpty() || times[0].isEmpty() || times[1].isEmpty()) {
+                        throw new Exception("Wait, you can't just say event without a clear stuff! State what you're gonna do after event.");
+                    }
+
                     tasks[taskCount] = new Event(dex, times[0], times[1]);
                     System.out.println("Got it, I've added this task");
                     System.out.println(tasks[taskCount].toString());
                     System.out.println("Now you have " + ++taskCount + " tasks in the list.");
-                }
-            }
 
-            else {
-                System.out.println("Come on, I don't even know what does this mean!");
+                } else {
+                    throw new Exception("Come on, I don't even know what does this mean!");
+                }
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
 
             System.out.println(logo);
@@ -187,6 +190,12 @@ public class BlondeBlazer {
         @Override
         public String toString() {
             return getType() + getStatus() + " " + taskName + " (by: " + by +  ")";
+        }
+    }
+
+    public class BlondeBlazerException extends Exception {
+        public BlondeBlazerException(String message) {
+            super(message);
         }
     }
 }
