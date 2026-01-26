@@ -48,19 +48,39 @@ public class BlondeBlazer {
                 System.out.println((index + 1) + ". " + tasks[index].toString());
             }
 
-            else {
-                tasks[taskCount] = new Task(line);
-                taskCount++;
-                System.out.println("added: " + line);
+            else if (line.startsWith("todo ")) {
+                String dex = line.substring(5);
+                tasks[taskCount] = new ToDo(dex);
+                System.out.println("Got it, I've added this task");
+                System.out.println(tasks[taskCount].toString());
+                System.out.println("Now you have " + ++taskCount + " tasks in the list.");
+            }
+
+            else if (line.startsWith("deadline ")) {
+                String[] parts = line.substring(9).split(" /by ");
+                tasks[taskCount] = new Deadline(parts[0], parts[1]);
+                System.out.println("Got it, I've added this task");
+                System.out.println(tasks[taskCount].toString());
+                System.out.println("Now you have " + ++taskCount + " tasks in the list.");
+            }
+
+            else if (line.startsWith("event ")) {
+                String[] parts = line.substring(6).split(" /from ");
+                String dex = parts[0];
+                String[] times = parts[1].split(" /to ");
+                tasks[taskCount] = new Event(dex, times[0], times[1]);
+                System.out.println("Got it, I've added this task");
+                System.out.println(tasks[taskCount].toString());
+                System.out.println("Now you have " + ++taskCount + " tasks in the list.");
             }
 
             System.out.println(logo);
         }
     }
 
-    static class Task {
-        String taskName;
-        boolean isDone;
+    abstract static class Task {
+        protected String taskName;
+        protected boolean isDone;
 
         Task(String taskName) {
             this.taskName = taskName;
@@ -79,9 +99,62 @@ public class BlondeBlazer {
             return isDone ? "[X]" : "[ ]";
         }
 
+        protected abstract String getType();
+
         @Override
         public String toString() {
-            return getStatus() + " " + taskName;
+            return getType() + getStatus() + " " + taskName;
+        }
+    }
+
+    static class ToDo extends Task {
+        ToDo(String taskName) {
+            super(taskName);
+        }
+
+        @Override
+        protected String getType() {
+            return "[T]";
+        }
+    }
+
+    static class Event extends Task {
+        private String from;
+        private String to;
+
+        Event(String taskName, String from, String to) {
+            super(taskName);
+            this.from = from;
+            this.to = to;
+        }
+
+        @Override
+        protected String getType() {
+            return "[E]";
+        }
+
+        @Override
+        public String toString() {
+            return getType() + getStatus() + " " + taskName + " (from: " + from + " to: " + to + ")";
+        }
+    }
+
+    static class Deadline extends Task {
+        private String by;
+
+        Deadline(String taskName, String by) {
+            super(taskName);
+            this.by = by;
+        }
+
+        @Override
+        protected String getType() {
+            return "[D]";
+        }
+
+        @Override
+        public String toString() {
+            return getType() + getStatus() + " " + taskName + " (by: " + by +  ")";
         }
     }
 }
