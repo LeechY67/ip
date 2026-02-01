@@ -1,7 +1,67 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.IOException;
+import java.util.List;
 
 public class BlondeBlazer {
+    private static final String DATA_DIR = "data";
+    private static final String DATA_FILE = "BlondeBlazer.txt";
+    private static final Path DATA_PATH = Paths.get(DATA_DIR, DATA_FILE);
+
+    private static void saveTasks(ArrayList<Task> tasks) throws BlondeBlazerException {
+        try {
+            Files.createDirectories(Paths.get(DATA_DIR));
+
+            ArrayList<String> lines = new ArrayList<>();
+            for (Task t : tasks) {
+                lines.add(encodeTask(t));
+            }
+            Files.write(DATA_PATH, lines);
+        } catch (IOException e) {
+            throw new BlondeBlazerException("Failed to save tasks: " + e.getMessage());
+        }
+    }
+
+    private static ArrayList<Task> loadTasks() throws BlondeBlazerException {
+        ArrayList<Task> tasks = new ArrayList<>();
+
+        try {
+            if (!Files.exists(DATA_PATH)) {
+                return tasks;
+            }
+
+            List<String> lines = Files.readAllLines(DATA_PATH);
+            for (String line : lines) {
+                if (line == null || line.trim().isEmpty()) {
+                    continue;
+                }
+
+                try {
+                    Task t = decodeTask(line);
+                    if (t != null) {
+                        tasks.add(t);
+                    }
+                } catch (Exception ex) {
+                    System.out.println("Skipping corrupted line: " + line);
+                }
+            }
+            return tasks;
+        } catch (IOException e) {
+            throw new BlondeBlazerException("Failed to load tasks: " + e.getMessage());
+        }
+    }
+
+    private static String encodeTask(Task t) {
+        
+    }
+
+    private static Task decodeTask(String line) throws BlondeBlazerException {
+
+    }
+
     public static void main(String[] args) {
         String logo = "----------------------------------------------------------------------------------------";
         System.out.println(logo + "\n" + "Hello! I'm BlondeBlazer!");
