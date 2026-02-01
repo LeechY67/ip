@@ -55,11 +55,56 @@ public class BlondeBlazer {
     }
 
     private static String encodeTask(Task t) {
-        
+        String done = t.isDone ? "1" : "0";
+
+        if (t instanceof ToDo) {
+            return "T | " + done + " | " + t.taskName;
+        } else if (t instanceof Deadline) {
+            Deadline d = (Deadline) t;
+            return "D | " + done + " | " + d.taskName + " | " + d.by;
+        } else if (t instanceof Event) {
+            Event e = (Event) t;
+            return "E | " + done + " | " + e.taskName + " | " + e.from + " | " + e.to;
+        } else {
+            return "T | " + done + " | " + t.taskName;
+        }
     }
 
     private static Task decodeTask(String line) throws BlondeBlazerException {
+        String[] parts = line.split("\\s*\\|\\s*");
+        if (parts.length < 3) {
+            throw new BlondeBlazerException("Corrupted data line: " + line);
+        }
 
+        String type = parts[0].trim();
+        boolean done = parts[1].trim().equals("1");
+        String desc = parts[2];
+
+        Task t;
+        switch (type) {
+            case "T":
+                t = new ToDo(desc);
+                break;
+            case "D":
+                if (parts.length < 4) {
+                    throw new BlondeBlazerException("Corrupted deadline line: " + line);
+                }
+                t = new Deadline(desc, parts[3]);
+                break;
+            case "E":
+                if (parts.length < 5) {
+                    throw new BlondeBlazerException("Corrupted event line: " + line);
+                }
+                t = new Event(desc, parts[3], parts[4]);
+                break;
+            default:
+                throw new BlondeBlazerException("Unknown task type: " + type);
+        }
+
+        if (done) {
+            t.mark();
+        }
+        return t;
     }
 
     public static void main(String[] args) {
@@ -68,7 +113,13 @@ public class BlondeBlazer {
         System.out.println("What can I do for you?");
         System.out.println(logo);
 
-        ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = null;
+        try {
+            tasks = loadTasks();
+        } catch (BlondeBlazerException e) {
+            throw new RuntimeException(e);
+        }
+
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNextLine()) {
@@ -97,6 +148,7 @@ public class BlondeBlazer {
                     int index = Integer.parseInt(line.substring(5)) - 1;
 
                     tasks.get(index).mark();
+                    saveTasks(tasks);
                     System.out.println("Nice, I've marked this task as done!");
                     System.out.println((index + 1) + ". " + tasks.get(index).toString());
 
@@ -107,6 +159,7 @@ public class BlondeBlazer {
 
                     int index = Integer.parseInt(line.substring(7)) - 1;
                     tasks.get(index).unmark();
+                    saveTasks(tasks);
                     System.out.println("OK, I've marked this task as not done yet: ");
                     System.out.println((index + 1) + ". " + tasks.get(index).toString());
 
@@ -122,6 +175,7 @@ public class BlondeBlazer {
                     }
 
                     tasks.add(new ToDo(dex));
+                    saveTasks(tasks);
                     System.out.println("Got it, I've added this task");
                     System.out.println(tasks.get(tasks.size() - 1).toString());
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
@@ -138,6 +192,7 @@ public class BlondeBlazer {
                     }
 
                     tasks.add(new Deadline(parts[0], parts[1]));
+                    saveTasks(tasks);
                     System.out.println("Got it, I've added this task");
                     System.out.println(tasks.get(tasks.size() - 1).toString());
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
@@ -157,6 +212,7 @@ public class BlondeBlazer {
                     }
 
                     tasks.add(new Event(dex, times[0], times[1]));
+                    saveTasks(tasks);
                     System.out.println("Got it, I've added this task");
                     System.out.println(tasks.get(tasks.size() - 1).toString());
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
@@ -169,6 +225,7 @@ public class BlondeBlazer {
                    String num = line.substring(7);
                    int index = Integer.parseInt(num) - 1;
                    Task removed = tasks.remove(index);
+                   saveTasks(tasks);
 
                    System.out.println("Noted. I've removed this task:");
                    System.out.println(removed);
@@ -227,8 +284,8 @@ public class BlondeBlazer {
     }
 
     static class Event extends Task {
-        private String from;
-        private String to;
+        protected String from;
+        protected String to;
 
         Event(String taskName, String from, String to) {
             super(taskName);
@@ -248,7 +305,7 @@ public class BlondeBlazer {
     }
 
     static class Deadline extends Task {
-        private String by;
+        protected String by;
 
         Deadline(String taskName, String by) {
             super(taskName);
