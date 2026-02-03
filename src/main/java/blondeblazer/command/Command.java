@@ -1,3 +1,10 @@
+package blondeblazer.command;
+
+import blondeblazer.BlondeBlazerException;
+import blondeblazer.storage.Storage;
+import blondeblazer.task.TaskList;
+import blondeblazer.ui.Ui;
+
 public abstract class Command {
     protected boolean isExit = false;
 

@@ -1,7 +1,16 @@
+package blondeblazer;
+
+import blondeblazer.command.Command;
+import blondeblazer.parser.Parser;
+import blondeblazer.storage.Storage;
+import blondeblazer.task.Task;
+import blondeblazer.task.TaskList;
+import blondeblazer.ui.Ui;
+
 import java.util.ArrayList;
 
 public class BlondeBlazer {
-    private static final String DEFAULT_FILE_PATH = "data/BlondeBlazer.txt";
+    private static final String DEFAULT_FILE_PATH = "data/blondeblazer.BlondeBlazer.txt";
 
     private final Ui ui;
     private final Storage storage;

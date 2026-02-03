@@ -1,3 +1,8 @@
+package blondeblazer.parser;
+
+import blondeblazer.BlondeBlazerException;
+import blondeblazer.command.*;
+
 public class Parser {
     public static Command parse(String fullCommand) throws BlondeBlazerException {
         String input = fullCommand == null ? "" : fullCommand.trim();

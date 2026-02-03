@@ -1,3 +1,12 @@
+package blondeblazer.command;
+
+import blondeblazer.BlondeBlazerException;
+import blondeblazer.storage.Storage;
+import blondeblazer.task.Task;
+import blondeblazer.task.TaskList;
+import blondeblazer.task.ToDo;
+import blondeblazer.ui.Ui;
+
 public class ToDoCommand extends Command {
     private final String description;
 

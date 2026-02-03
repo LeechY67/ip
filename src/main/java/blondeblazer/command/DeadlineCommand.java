@@ -1,3 +1,12 @@
+package blondeblazer.command;
+
+import blondeblazer.BlondeBlazerException;
+import blondeblazer.storage.Storage;
+import blondeblazer.task.Deadline;
+import blondeblazer.task.Task;
+import blondeblazer.task.TaskList;
+import blondeblazer.ui.Ui;
+
 public class DeadlineCommand extends Command {
     private final String desc;
     private final String by;

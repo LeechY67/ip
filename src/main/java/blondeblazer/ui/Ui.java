@@ -1,3 +1,7 @@
+package blondeblazer.ui;
+
+import blondeblazer.task.Task;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -7,7 +11,7 @@ public class Ui {
 
     public void showWelcome() {
         System.out.println(LINE);
-        System.out.println("Hello! I'm BlondeBlazer!");
+        System.out.println("Hello! I'm blondeblazer.BlondeBlazer!");
         System.out.println("What can I do for you?");
         System.out.println(LINE);
     }
