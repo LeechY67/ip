@@ -6,6 +6,10 @@ import java.nio.file.Paths;
 import java.io.IOException;
 import java.util.List;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class BlondeBlazer {
     private static final String DATA_DIR = "data";
     private static final String DATA_FILE = "BlondeBlazer.txt";
@@ -231,7 +235,41 @@ public class BlondeBlazer {
                    System.out.println(removed);
                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
 
-                }  else {
+                } else if (line.startsWith("on")) {
+                    if (line.length() <= 3) {
+                        throw new BlondeBlazerException("Command 'on' should be followed with a date.");
+                    }
+
+                    String date = line.substring(3);
+                    LocalDate targetDate;
+
+                    try {
+                        targetDate = LocalDate.parse(date);
+                    } catch (Exception e) {
+                        throw new BlondeBlazerException("Invalid date format!");
+                    }
+
+                    System.out.println("Here are the task on " + targetDate + ":");
+
+                    boolean found = false;
+                    int index = 1;
+
+                    for (Task task : tasks) {
+                        if (task instanceof Deadline) {
+                            Deadline d = (Deadline) task;
+                            if(d.getBy().equals(targetDate)) {
+                                System.out.println(index + ". " + d.toString());
+                                found = true;
+                            }
+                        }
+                        index++;
+                    }
+
+                    if (!found) {
+                        System.out.println("No tasks found on that date.");
+                    }
+                }
+                else {
                     throw new Exception("Come on, I don't even know what does this mean!");
                 }
 
@@ -305,11 +343,19 @@ public class BlondeBlazer {
     }
 
     static class Deadline extends Task {
-        protected String by;
+        protected LocalDate by;
 
-        Deadline(String taskName, String by) {
+        Deadline(String taskName, String by) throws BlondeBlazerException {
             super(taskName);
-            this.by = by;
+            try {
+                this.by = LocalDate.parse(by.trim());
+            } catch (Exception e) {
+                throw new BlondeBlazerException("Invalid Date format! Use yyyy-mm-dd!");
+            }
+        }
+
+        public LocalDate getBy() {
+            return by;
         }
 
         @Override
@@ -319,7 +365,7 @@ public class BlondeBlazer {
 
         @Override
         public String toString() {
-            return getType() + getStatus() + " " + taskName + " (by: " + by +  ")";
+            return getType() + getStatus() + " " + taskName + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) +  ")";
         }
     }
 
