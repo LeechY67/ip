@@ -235,7 +235,41 @@ public class BlondeBlazer {
                    System.out.println(removed);
                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
 
-                }  else {
+                } else if (line.startsWith("on")) {
+                    if (line.length() <= 3) {
+                        throw new BlondeBlazerException("Command 'on' should be followed with a date.");
+                    }
+
+                    String date = line.substring(3);
+                    LocalDate targetDate;
+
+                    try {
+                        targetDate = LocalDate.parse(date);
+                    } catch (Exception e) {
+                        throw new BlondeBlazerException("Invalid date format!");
+                    }
+
+                    System.out.println("Here are the task on " + targetDate + ":");
+
+                    boolean found = false;
+                    int index = 1;
+
+                    for (Task task : tasks) {
+                        if (task instanceof Deadline) {
+                            Deadline d = (Deadline) task;
+                            if(d.getBy().equals(targetDate)) {
+                                System.out.println(index + ". " + d.toString());
+                                found = true;
+                            }
+                        }
+                        index++;
+                    }
+
+                    if (!found) {
+                        System.out.println("No tasks found on that date.");
+                    }
+                }
+                else {
                     throw new Exception("Come on, I don't even know what does this mean!");
                 }
 
@@ -318,6 +352,10 @@ public class BlondeBlazer {
             } catch (Exception e) {
                 throw new BlondeBlazerException("Invalid Date format! Use yyyy-mm-dd!");
             }
+        }
+
+        public LocalDate getBy() {
+            return by;
         }
 
         @Override
