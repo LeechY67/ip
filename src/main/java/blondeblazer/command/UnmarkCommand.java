@@ -1,18 +1,25 @@
-public class DeleteCommand extends Command {
+package blondeblazer.command;
+
+import blondeblazer.BlondeBlazerException;
+import blondeblazer.storage.Storage;
+import blondeblazer.task.TaskList;
+import blondeblazer.ui.Ui;
+
+public class UnmarkCommand extends Command {
     private final int index;
 
-    public DeleteCommand(String input) throws BlondeBlazerException {
+    public UnmarkCommand(String input) throws BlondeBlazerException {
         if (input.length() <= 7) {
-            throw new BlondeBlazerException("Delete what? At least give me a number.");
+            throw new BlondeBlazerException("Bro, I don't know what you're gonna unmark...");
         }
         this.index = parseIndex(input.substring(7));
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws BlondeBlazerException {
-        Task removed = tasks.remove(index);
+        tasks.unmark(index);
         storage.save(tasks.getTasks());
-        ui.showTaskDeleted(removed, tasks.size());
+        ui.showUnmarked(tasks.get(index), index + 1);
     }
 
     private int parseIndex(String s) throws BlondeBlazerException {

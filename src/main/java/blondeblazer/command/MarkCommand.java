@@ -1,3 +1,10 @@
+package blondeblazer.command;
+
+import blondeblazer.BlondeBlazerException;
+import blondeblazer.storage.Storage;
+import blondeblazer.task.TaskList;
+import blondeblazer.ui.Ui;
+
 public class MarkCommand extends Command {
     private final int index;
 

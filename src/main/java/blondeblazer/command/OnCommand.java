@@ -1,3 +1,12 @@
+package blondeblazer.command;
+
+import blondeblazer.BlondeBlazerException;
+import blondeblazer.storage.Storage;
+import blondeblazer.task.Deadline;
+import blondeblazer.task.Task;
+import blondeblazer.task.TaskList;
+import blondeblazer.ui.Ui;
+
 import java.time.LocalDate;
 
 public class OnCommand extends Command {
@@ -5,7 +14,7 @@ public class OnCommand extends Command {
 
     public OnCommand(String input) throws BlondeBlazerException {
         if (input.length() <= 3) {
-            throw new BlondeBlazerException("Command 'on' should be followed with a date.");
+            throw new BlondeBlazerException("blondeblazer.command.Command 'on' should be followed with a date.");
         }
 
         String date = input.substring(3).trim();

@@ -1,3 +1,7 @@
+package blondeblazer.task;
+
+import blondeblazer.BlondeBlazerException;
+
 import java.util.ArrayList;
 
 public class TaskList {

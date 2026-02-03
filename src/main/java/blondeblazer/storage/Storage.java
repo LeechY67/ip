@@ -1,3 +1,11 @@
+package blondeblazer.storage;
+
+import blondeblazer.BlondeBlazerException;
+import blondeblazer.task.Deadline;
+import blondeblazer.task.Event;
+import blondeblazer.task.Task;
+import blondeblazer.task.ToDo;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
