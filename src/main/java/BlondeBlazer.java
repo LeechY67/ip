@@ -6,6 +6,10 @@ import java.nio.file.Paths;
 import java.io.IOException;
 import java.util.List;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class BlondeBlazer {
     private static final String DATA_DIR = "data";
     private static final String DATA_FILE = "BlondeBlazer.txt";
@@ -305,11 +309,15 @@ public class BlondeBlazer {
     }
 
     static class Deadline extends Task {
-        protected String by;
+        protected LocalDate by;
 
-        Deadline(String taskName, String by) {
+        Deadline(String taskName, String by) throws BlondeBlazerException {
             super(taskName);
-            this.by = by;
+            try {
+                this.by = LocalDate.parse(by.trim());
+            } catch (Exception e) {
+                throw new BlondeBlazerException("Invalid Date format! Use yyyy-mm-dd!");
+            }
         }
 
         @Override
@@ -319,7 +327,7 @@ public class BlondeBlazer {
 
         @Override
         public String toString() {
-            return getType() + getStatus() + " " + taskName + " (by: " + by +  ")";
+            return getType() + getStatus() + " " + taskName + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) +  ")";
         }
     }
 
