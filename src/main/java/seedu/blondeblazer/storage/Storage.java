@@ -1,10 +1,10 @@
-package blondeblazer.storage;
+package seedu.blondeblazer.storage;
 
-import blondeblazer.BlondeBlazerException;
-import blondeblazer.task.Deadline;
-import blondeblazer.task.Event;
-import blondeblazer.task.Task;
-import blondeblazer.task.ToDo;
+import seedu.blondeblazer.BlondeBlazerException;
+import seedu.blondeblazer.task.Deadline;
+import seedu.blondeblazer.task.Event;
+import seedu.blondeblazer.task.Task;
+import seedu.blondeblazer.task.ToDo;
 
 import java.io.IOException;
 import java.nio.file.Files;

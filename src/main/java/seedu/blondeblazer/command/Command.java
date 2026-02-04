@@ -1,9 +1,9 @@
-package blondeblazer.command;
+package seedu.blondeblazer.command;
 
-import blondeblazer.BlondeBlazerException;
-import blondeblazer.storage.Storage;
-import blondeblazer.task.TaskList;
-import blondeblazer.ui.Ui;
+import seedu.blondeblazer.BlondeBlazerException;
+import seedu.blondeblazer.storage.Storage;
+import seedu.blondeblazer.task.TaskList;
+import seedu.blondeblazer.ui.Ui;
 
 public abstract class Command {
     protected boolean isExit = false;

@@ -1,6 +1,6 @@
-package blondeblazer.task;
+package seedu.blondeblazer.task;
 
-import blondeblazer.BlondeBlazerException;
+import seedu.blondeblazer.BlondeBlazerException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

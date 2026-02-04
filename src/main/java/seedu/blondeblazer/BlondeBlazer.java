@@ -1,16 +1,16 @@
-package blondeblazer;
+package seedu.blondeblazer;
 
-import blondeblazer.command.Command;
-import blondeblazer.parser.Parser;
-import blondeblazer.storage.Storage;
-import blondeblazer.task.Task;
-import blondeblazer.task.TaskList;
-import blondeblazer.ui.Ui;
+import seedu.blondeblazer.command.Command;
+import seedu.blondeblazer.parser.Parser;
+import seedu.blondeblazer.storage.Storage;
+import seedu.blondeblazer.task.Task;
+import seedu.blondeblazer.task.TaskList;
+import seedu.blondeblazer.ui.Ui;
 
 import java.util.ArrayList;
 
 public class BlondeBlazer {
-    private static final String DEFAULT_FILE_PATH = "data/blondeblazer.BlondeBlazer.txt";
+    private static final String DEFAULT_FILE_PATH = "data/seedu.blondeblazer.BlondeBlazer.txt";
 
     private final Ui ui;
     private final Storage storage;

@@ -1,25 +1,26 @@
-package blondeblazer.command;
+package seedu.blondeblazer.command;
 
-import blondeblazer.BlondeBlazerException;
-import blondeblazer.storage.Storage;
-import blondeblazer.task.TaskList;
-import blondeblazer.ui.Ui;
+import seedu.blondeblazer.BlondeBlazerException;
+import seedu.blondeblazer.storage.Storage;
+import seedu.blondeblazer.task.Task;
+import seedu.blondeblazer.task.TaskList;
+import seedu.blondeblazer.ui.Ui;
 
-public class UnmarkCommand extends Command {
+public class DeleteCommand extends Command {
     private final int index;
 
-    public UnmarkCommand(String input) throws BlondeBlazerException {
+    public DeleteCommand(String input) throws BlondeBlazerException {
         if (input.length() <= 7) {
-            throw new BlondeBlazerException("Bro, I don't know what you're gonna unmark...");
+            throw new BlondeBlazerException("Delete what? At least give me a number.");
         }
         this.index = parseIndex(input.substring(7));
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws BlondeBlazerException {
-        tasks.unmark(index);
+        Task removed = tasks.remove(index);
         storage.save(tasks.getTasks());
-        ui.showUnmarked(tasks.get(index), index + 1);
+        ui.showTaskDeleted(removed, tasks.size());
     }
 
     private int parseIndex(String s) throws BlondeBlazerException {

@@ -1,8 +1,8 @@
-package blondeblazer.command;
+package seedu.blondeblazer.command;
 
-import blondeblazer.storage.Storage;
-import blondeblazer.task.TaskList;
-import blondeblazer.ui.Ui;
+import seedu.blondeblazer.storage.Storage;
+import seedu.blondeblazer.task.TaskList;
+import seedu.blondeblazer.ui.Ui;
 
 public class ByeCommand extends Command {
     public ByeCommand() {

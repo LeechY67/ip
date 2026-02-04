@@ -1,7 +1,7 @@
-package blondeblazer.parser;
+package seedu.blondeblazer.parser;
 
-import blondeblazer.BlondeBlazerException;
-import blondeblazer.command.*;
+import seedu.blondeblazer.BlondeBlazerException;
+import seedu.blondeblazer.command.*;
 
 public class Parser {
     public static Command parse(String fullCommand) throws BlondeBlazerException {

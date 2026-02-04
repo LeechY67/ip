@@ -1,4 +1,4 @@
-package blondeblazer.task;
+package seedu.blondeblazer.task;
 
 public class Event extends Task {
     private final String from;

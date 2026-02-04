@@ -1,5 +1,5 @@
 ---------------------------------------------
-Hello! I'm blondeblazer.BlondeBlazer!
+Hello! I'm seedu.blondeblazer.BlondeBlazer!
 What can I do for you?
 ---------------------------------------------
 Got it, I've added this task

@@ -1,11 +1,11 @@
-package blondeblazer.command;
+package seedu.blondeblazer.command;
 
-import blondeblazer.BlondeBlazerException;
-import blondeblazer.storage.Storage;
-import blondeblazer.task.Deadline;
-import blondeblazer.task.Task;
-import blondeblazer.task.TaskList;
-import blondeblazer.ui.Ui;
+import seedu.blondeblazer.BlondeBlazerException;
+import seedu.blondeblazer.storage.Storage;
+import seedu.blondeblazer.task.Deadline;
+import seedu.blondeblazer.task.Task;
+import seedu.blondeblazer.task.TaskList;
+import seedu.blondeblazer.ui.Ui;
 
 public class DeadlineCommand extends Command {
     private final String desc;

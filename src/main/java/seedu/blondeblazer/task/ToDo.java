@@ -1,4 +1,4 @@
-package blondeblazer.task;
+package seedu.blondeblazer.task;
 
 public class ToDo extends Task {
     public ToDo(String taskName) {

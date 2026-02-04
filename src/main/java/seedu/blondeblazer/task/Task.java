@@ -1,4 +1,4 @@
-package blondeblazer.task;
+package seedu.blondeblazer.task;
 
 public abstract class Task {
     protected String taskName;
