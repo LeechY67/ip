@@ -1,8 +1,8 @@
 package seedu.blondeblazer.task;
 
-import seedu.blondeblazer.BlondeBlazerException;
-
 import java.util.ArrayList;
+
+import seedu.blondeblazer.BlondeBlazerException;
 
 public class TaskList {
     private final ArrayList<Task> tasks;

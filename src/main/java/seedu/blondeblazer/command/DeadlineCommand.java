@@ -14,14 +14,16 @@ public class DeadlineCommand extends Command {
     public DeadlineCommand(String input) throws BlondeBlazerException {
         if (input.length() <= 9) {
             throw new BlondeBlazerException(
-                    "Wait, you can't just say deadline without a clear stuff! State what you're gonna do after deadline.");
+                    "Wait, you can't just say deadline without a clear stuff! " +
+                            "State what you're gonna do after deadline.");
         }
 
         String rest = input.substring(9).trim();
         String[] parts = rest.split(" /by ", 2);
         if (parts.length < 2 || parts[0].trim().isEmpty() || parts[1].trim().isEmpty()) {
             throw new BlondeBlazerException(
-                    "Wait, you can't just say deadline without a clear stuff! State what you're gonna do after deadline.");
+                    "Wait, you can't just say deadline without a clear stuff! " +
+                            "State what you're gonna do after deadline.");
         }
 
         desc = parts[0].trim();

@@ -1,23 +1,13 @@
 package seedu.blondeblazer.task;
 
-import seedu.blondeblazer.BlondeBlazerException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Represents a task with a deadline.
- * A {@code Deadline} task has a description and a due date.
- */
+import seedu.blondeblazer.BlondeBlazerException;
+
 public class Deadline extends Task {
     private final LocalDate by;
 
-    /**
-     * Constructs a {@code Deadline} task with the given description and due date.
-     *
-     * @param taskName Description of the task.
-     * @param by Due date of the task.
-     * @throws BlondeBlazerException If the data format is invalid.
-     */
     public Deadline(String taskName, String by) throws BlondeBlazerException {
         super(taskName);
         try {

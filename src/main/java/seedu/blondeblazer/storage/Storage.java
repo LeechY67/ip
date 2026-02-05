@@ -1,11 +1,5 @@
 package seedu.blondeblazer.storage;
 
-import seedu.blondeblazer.BlondeBlazerException;
-import seedu.blondeblazer.task.Deadline;
-import seedu.blondeblazer.task.Event;
-import seedu.blondeblazer.task.Task;
-import seedu.blondeblazer.task.ToDo;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,29 +7,19 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Handles loading and saving of tasks to a local data file.
- *
- * <p>The Tasks are stored in a plain text file and encoded line by line.</p>
- */
+import seedu.blondeblazer.BlondeBlazerException;
+import seedu.blondeblazer.task.Deadline;
+import seedu.blondeblazer.task.Event;
+import seedu.blondeblazer.task.Task;
+import seedu.blondeblazer.task.ToDo;
+
 public class Storage {
     private final Path dataPath;
 
-    /**
-     * Creates a storage that reads from and write to the given file path.
-     *
-     * @param filePath Path to the local data file.
-     */
     public Storage(String filePath) {
         this.dataPath = Paths.get(filePath);
     }
 
-    /**
-     * Loads tasks from the data file.
-     *
-     * @return A list of tasks from local file.
-     * @throws BlondeBlazerException If an error occurs when reading the file.
-     */
     public ArrayList<Task> load() throws BlondeBlazerException {
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -65,12 +49,6 @@ public class Storage {
         }
     }
 
-    /**
-     * Saves the given list of tasks into the local file.
-     *
-     * @param tasks The list of tasks to be saved.
-     * @throws BlondeBlazerException If an error occurs when writing to the file.
-     */
     public void save(ArrayList<Task> tasks) throws BlondeBlazerException {
         try {
             Path parent = dataPath.getParent();

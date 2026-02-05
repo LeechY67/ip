@@ -1,5 +1,7 @@
 package seedu.blondeblazer.command;
 
+import java.time.LocalDate;
+
 import seedu.blondeblazer.BlondeBlazerException;
 import seedu.blondeblazer.storage.Storage;
 import seedu.blondeblazer.task.Deadline;
@@ -7,22 +9,9 @@ import seedu.blondeblazer.task.Task;
 import seedu.blondeblazer.task.TaskList;
 import seedu.blondeblazer.ui.Ui;
 
-import java.time.LocalDate;
-
-/**
- * Represents a command that lists all {@link Deadline} tasks that have the specific due date.
- *
- * <p>The command takes a date as the input and returns all deadlines that are on that date.</p>
- */
 public class OnCommand extends Command {
     private final LocalDate targetDate;
 
-    /**
-     * Constructs an {@code OnCommand} using user input.
-     *
-     * @param input The full user input.
-     * @throws BlondeBlazerException If input is invalid.
-     */
     public OnCommand(String input) throws BlondeBlazerException {
         if (input.length() <= 3) {
             throw new BlondeBlazerException("blondeblazer.command.Command 'on' should be followed with a date.");
