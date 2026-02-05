@@ -1,9 +1,21 @@
 package seedu.blondeblazer.task;
 
+/**
+ * Represents a task with a starting time and ending time.
+ * A {@code Event} task has a description and a starting and ending time.
+ */
 public class Event extends Task {
     private final String from;
     private final String to;
 
+    /**
+     * Constructs a {@code Event} task with given description
+     * and starting and ending time.
+     *
+     * @param taskName Description of the task.
+     * @param from Starting time.
+     * @param to Ending time.
+     */
     public Event(String taskName, String from, String to) {
         super(taskName);
         this.from = from;
