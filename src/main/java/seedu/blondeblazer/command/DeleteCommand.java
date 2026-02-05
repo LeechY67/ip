@@ -6,9 +6,20 @@ import seedu.blondeblazer.task.Task;
 import seedu.blondeblazer.task.TaskList;
 import seedu.blondeblazer.ui.Ui;
 
+/**
+ * Represents a command that deletes the indicated task.
+ *
+ * <p>The command takes a number as the input and removes the corresponding task.</p>
+ */
 public class DeleteCommand extends Command {
     private final int index;
 
+    /**
+     * Constructs a {@code DeleteCommand} with the user input.
+     *
+     * @param input The user input.
+     * @throws BlondeBlazerException If input is invalid.
+     */
     public DeleteCommand(String input) throws BlondeBlazerException {
         if (input.length() <= 7) {
             throw new BlondeBlazerException("Delete what? At least give me a number.");
