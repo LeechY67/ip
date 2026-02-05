@@ -35,6 +35,9 @@ public class Parser {
         if (input.equals("list")) {
             return new ListCommand();
         }
+        if (input.startsWith("find")) {
+            return new FindCommand(input);
+        }
         if (input.startsWith("mark")) {
             return new MarkCommand(input);
         }

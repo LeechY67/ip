@@ -2,6 +2,7 @@ package seedu.blondeblazer.ui;
 
 import seedu.blondeblazer.task.Task;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -74,5 +75,13 @@ public class Ui {
 
     public void showNoTasksFoundOnDate() {
         System.out.println("No tasks found on that date.");
+    }
+
+    public void showFindResult() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
+
+    public void showNoFinding() {
+        System.out.println("No related findings...");
     }
 }
