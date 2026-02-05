@@ -6,6 +6,7 @@ import seedu.blondeblazer.command.Command;
 import seedu.blondeblazer.command.DeadlineCommand;
 import seedu.blondeblazer.command.DeleteCommand;
 import seedu.blondeblazer.command.EventCommand;
+import seedu.blondeblazer.command.FindCommand;
 import seedu.blondeblazer.command.ListCommand;
 import seedu.blondeblazer.command.MarkCommand;
 import seedu.blondeblazer.command.OnCommand;
