@@ -1,17 +1,17 @@
 package seedu.blondeblazer.storage;
 
-import seedu.blondeblazer.BlondeBlazerException;
-import seedu.blondeblazer.task.Deadline;
-import seedu.blondeblazer.task.Event;
-import seedu.blondeblazer.task.Task;
-import seedu.blondeblazer.task.ToDo;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
+import seedu.blondeblazer.BlondeBlazerException;
+import seedu.blondeblazer.task.Deadline;
+import seedu.blondeblazer.task.Event;
+import seedu.blondeblazer.task.Task;
+import seedu.blondeblazer.task.ToDo;
 
 public class Storage {
     private final Path dataPath;

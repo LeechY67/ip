@@ -1,11 +1,13 @@
 package seedu.blondeblazer.parser;
 
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.blondeblazer.BlondeBlazerException;
 import seedu.blondeblazer.command.Command;
 import seedu.blondeblazer.command.ToDoCommand;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ParserTest {
     Parser parser = new Parser();

@@ -1,13 +1,13 @@
 package seedu.blondeblazer.command;
 
+import java.time.LocalDate;
+
 import seedu.blondeblazer.BlondeBlazerException;
 import seedu.blondeblazer.storage.Storage;
 import seedu.blondeblazer.task.Deadline;
 import seedu.blondeblazer.task.Task;
 import seedu.blondeblazer.task.TaskList;
 import seedu.blondeblazer.ui.Ui;
-
-import java.time.LocalDate;
 
 public class OnCommand extends Command {
     private final LocalDate targetDate;

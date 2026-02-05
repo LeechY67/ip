@@ -1,9 +1,9 @@
 package seedu.blondeblazer.task;
 
-import seedu.blondeblazer.BlondeBlazerException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import seedu.blondeblazer.BlondeBlazerException;
 
 public class Deadline extends Task {
     private final LocalDate by;
