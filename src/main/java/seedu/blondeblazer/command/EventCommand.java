@@ -38,10 +38,13 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BlondeBlazerException {
+    public String execute(TaskList tasks, Storage storage) throws BlondeBlazerException {
         Task t = new Event(desc, from, to);
         tasks.add(t);
         storage.save(tasks.getTasks());
-        ui.showTaskAdded(t, tasks.size());
+
+        return  "Got it, I've added this task:\n"
+                + t + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.";
     }
 }

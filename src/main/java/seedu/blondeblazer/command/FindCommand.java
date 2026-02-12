@@ -4,8 +4,6 @@ import seedu.blondeblazer.BlondeBlazerException;
 import seedu.blondeblazer.storage.Storage;
 import seedu.blondeblazer.task.Task;
 import seedu.blondeblazer.task.TaskList;
-import seedu.blondeblazer.ui.Ui;
-
 
 public class FindCommand extends Command {
     private final String keyword;
@@ -19,19 +17,28 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showFindResult();
+    public String execute(TaskList tasks, Storage storage) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:\n");
+
         boolean found = false;
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.getTasks().get(i);
+
             if (task.getTaskName().contains(keyword)) {
-                System.out.println((i + 1) + ". " + task);
+                sb.append(i + 1).append(". ").append(task).append("\n");
                 found = true;
             }
         }
 
         if (!found) {
-            ui.showNoFinding();
+            return "No related findings...";
         }
+
+        if (sb.length() > 0 && sb.charAt(sb.length() - 1) == '\n') {
+            sb.deleteCharAt(sb.length() - 1);
+        }
+        return sb.toString();
     }
 }
+

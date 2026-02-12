@@ -5,7 +5,6 @@ import seedu.blondeblazer.storage.Storage;
 import seedu.blondeblazer.task.Task;
 import seedu.blondeblazer.task.TaskList;
 import seedu.blondeblazer.task.ToDo;
-import seedu.blondeblazer.ui.Ui;
 
 public class ToDoCommand extends Command {
     private final String description;
@@ -23,10 +22,13 @@ public class ToDoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BlondeBlazerException {
+    public String execute(TaskList tasks, Storage storage) throws BlondeBlazerException {
         Task t = new ToDo(description);
         tasks.add(t);
         storage.save(tasks.getTasks());
-        ui.showTaskAdded(t, tasks.size());
+
+        return  "Got it, I've added this task:\n"
+                + t + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.";
     }
 }

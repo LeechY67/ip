@@ -24,9 +24,8 @@ public abstract class Command {
      * Execute this command.
      *
      * @param tasks The task list to operate on.
-     * @param ui User interface.
      * @param storage The storage for loading and saving.
      * @throws BlondeBlazerException If an error occurs during execution.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws BlondeBlazerException;
+    public abstract String execute(TaskList tasks, Storage storage) throws BlondeBlazerException;
 }

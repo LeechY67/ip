@@ -2,6 +2,7 @@ package seedu.blondeblazer.command;
 
 import seedu.blondeblazer.BlondeBlazerException;
 import seedu.blondeblazer.storage.Storage;
+import seedu.blondeblazer.task.Task;
 import seedu.blondeblazer.task.TaskList;
 import seedu.blondeblazer.ui.Ui;
 
@@ -16,10 +17,13 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BlondeBlazerException {
+    public String execute(TaskList tasks, Storage storage) throws BlondeBlazerException {
         tasks.unmark(index);
+        Task t = tasks.getTasks().get(index);
         storage.save(tasks.getTasks());
-        ui.showUnmarked(tasks.get(index), index + 1);
+
+        return "Nice, I've marked this task as done!\n"
+                + (index + 1) + ". " + t;
     }
 
     private int parseIndex(String s) throws BlondeBlazerException {

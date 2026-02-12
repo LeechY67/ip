@@ -39,7 +39,7 @@ public class BlondeBlazer {
             try {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                c.execute(tasks, storage);
                 isExit = c.isExit();
             } catch (BlondeBlazerException e) {
                 ui.showError(e.getMessage());
@@ -51,7 +51,24 @@ public class BlondeBlazer {
         }
     }
 
-    public static void main(String[] args) {
-        new BlondeBlazer(DEFAULT_FILE_PATH).run();
+    private boolean isExit = false;
+
+    public boolean isExit() {
+        return isExit;
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            String result = c.execute(tasks, storage);
+            isExit = c.isExit();
+            return result;
+        } catch (BlondeBlazerException e) {
+            return e.getMessage();
+        } catch (Exception e) {
+            return e.getMessage() == null
+                    ? "Something went wrong."
+                    : e.getMessage();
+        }
     }
 }

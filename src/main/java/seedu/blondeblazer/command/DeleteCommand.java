@@ -28,10 +28,13 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BlondeBlazerException {
+    public String execute(TaskList tasks, Storage storage) throws BlondeBlazerException {
         Task removed = tasks.remove(index);
         storage.save(tasks.getTasks());
-        ui.showTaskDeleted(removed, tasks.size());
+
+        return "Noted. I've removed this task:\n"
+                + removed + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.";
     }
 
     private int parseIndex(String s) throws BlondeBlazerException {

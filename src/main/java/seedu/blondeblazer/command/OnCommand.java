@@ -7,7 +7,6 @@ import seedu.blondeblazer.storage.Storage;
 import seedu.blondeblazer.task.Deadline;
 import seedu.blondeblazer.task.Task;
 import seedu.blondeblazer.task.TaskList;
-import seedu.blondeblazer.ui.Ui;
 
 public class OnCommand extends Command {
     private final LocalDate targetDate;
@@ -26,23 +25,37 @@ public class OnCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showTasksOnDateHeader(targetDate.toString());
+    public String execute(TaskList tasks, Storage storage) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks on ")
+                .append(targetDate)
+                .append(":\n");
 
         boolean found = false;
+
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.getTasks().get(i);
+
             if (task instanceof Deadline) {
                 Deadline d = (Deadline) task;
                 if (d.getBy().equals(targetDate)) {
-                    System.out.println((i + 1) + ". " + d);
+                    sb.append(i + 1)
+                            .append(". ")
+                            .append(d)
+                            .append("\n");
                     found = true;
                 }
             }
         }
 
         if (!found) {
-            ui.showNoTasksFoundOnDate();
+            return "No tasks found on that date.";
         }
+
+        if (sb.length() > 0 && sb.charAt(sb.length() - 1) == '\n') {
+            sb.deleteCharAt(sb.length() - 1);
+        }
+
+        return sb.toString();
     }
 }
