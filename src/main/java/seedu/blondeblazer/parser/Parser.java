@@ -28,6 +28,7 @@ public class Parser {
      * @throws BlondeBlazerException If the input does not match with any command.
      */
     public static Command parse(String fullCommand) throws BlondeBlazerException {
+        assert fullCommand != null : "Input command should bot be null";
         String input = fullCommand == null ? "" : fullCommand.trim();
 
         if (input.equals("bye")) {

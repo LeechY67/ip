@@ -12,6 +12,9 @@ public class TaskList {
     }
 
     public TaskList(ArrayList<Task> tasks) {
+        assert tasks == null || tasks.stream().allMatch(t -> t != null)
+                : "task list should not contain null elements";
+
         this.tasks = tasks == null ? new ArrayList<>() : tasks;
     }
 
@@ -35,6 +38,7 @@ public class TaskList {
     }
 
     public void add(Task task) {
+        assert task != null : "Task added should not be null";
         tasks.add(task);
     }
 
