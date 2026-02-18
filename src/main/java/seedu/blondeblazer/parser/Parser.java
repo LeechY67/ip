@@ -9,6 +9,7 @@ import seedu.blondeblazer.command.EventCommand;
 import seedu.blondeblazer.command.FindCommand;
 import seedu.blondeblazer.command.ListCommand;
 import seedu.blondeblazer.command.MarkCommand;
+import seedu.blondeblazer.command.NoteCommand;
 import seedu.blondeblazer.command.OnCommand;
 import seedu.blondeblazer.command.ToDoCommand;
 import seedu.blondeblazer.command.UnmarkCommand;
@@ -32,46 +33,42 @@ public class Parser {
         assert fullCommand != null : "Input command should not be null";
 
         String input = fullCommand.trim();
-        if (input.isEmpty()) {
-            throw new BlondeBlazerException("Empty command.");
-        }
 
-        String[] parts = input.split("\\s+", 2);
-        String commandWord = parts[0];
-
-        switch (commandWord) {
-        case "bye":
+        if (input.equals("bye")) {
             return new ByeCommand();
-
-        case "list":
-            return new ListCommand();
-
-        case "find":
-            return new FindCommand(input);
-
-        case "mark":
-            return new MarkCommand(input);
-
-        case "unmark":
-            return new UnmarkCommand(input);
-
-        case "todo":
-            return new ToDoCommand(input);
-
-        case "deadline":
-            return new DeadlineCommand(input);
-
-        case "event":
-            return new EventCommand(input);
-
-        case "delete":
-            return new DeleteCommand(input);
-
-        case "on":
-            return new OnCommand(input);
-
-        default:
-            throw new BlondeBlazerException("Come on, I don't even know what does this " + commandWord + " mean!");
         }
+        if (input.equals("list")) {
+            return new ListCommand();
+        }
+        if (input.startsWith("find")) {
+            return new FindCommand(input);
+        }
+        if (input.startsWith("mark")) {
+            return new MarkCommand(input);
+        }
+        if (input.startsWith("unmark")) {
+            return new UnmarkCommand(input);
+        }
+        if (input.startsWith("todo")) {
+            return new ToDoCommand(input);
+        }
+        if (input.startsWith("deadline")) {
+            return new DeadlineCommand(input);
+        }
+        if (input.startsWith("event")) {
+            return new EventCommand(input);
+        }
+        if (input.startsWith("delete")) {
+            return new DeleteCommand(input);
+        }
+        if (input.startsWith("on")) {
+            return new OnCommand(input);
+        }
+
+        if (input.startsWith("note")) {
+            return new NoteCommand(input);
+        }
+
+        throw new BlondeBlazerException("Come on, I don't even know what does this " + input + " mean!");
     }
 }
