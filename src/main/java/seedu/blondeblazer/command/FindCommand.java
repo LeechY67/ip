@@ -9,11 +9,37 @@ public class FindCommand extends Command {
     private final String keyword;
 
     public FindCommand(String input) throws BlondeBlazerException {
-        if (input.length() <= 5) {
-            throw new BlondeBlazerException("blondeblazer.command.Command 'find' should be followed with a keyword.");
+        if (input == null) {
+            throw new BlondeBlazerException("Find keyword cannot be null.");
         }
 
-        this.keyword = input.substring(5).trim();
+        String trimmed = input.trim();
+        if (trimmed.isEmpty()) {
+            throw new BlondeBlazerException("Please provide a keyword to find.");
+        }
+
+        // Accept both "find xxx" and "xxx"
+        String[] parts = trimmed.split("\\s+", 2);
+        if (parts.length == 1) {
+            // maybe just keyword, or just "find"
+            if ("find".equals(parts[0])) {
+                throw new BlondeBlazerException("Please provide a keyword to find.");
+            }
+            this.keyword = parts[0];
+            return;
+        }
+
+        // parts.length == 2
+        if ("find".equals(parts[0])) {
+            String k = parts[1].trim();
+            if (k.isEmpty()) {
+                throw new BlondeBlazerException("Please provide a keyword to find.");
+            }
+            this.keyword = k;
+        } else {
+            // if user passed keyword with spaces, keep the rest
+            this.keyword = parts[1].trim().isEmpty() ? parts[0] : trimmed;
+        }
     }
 
     @Override
@@ -21,24 +47,23 @@ public class FindCommand extends Command {
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the matching tasks in your list:\n");
 
-        boolean found = false;
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.getTasks().get(i);
+        boolean hasMatches = false;
+        int displayIndex = 1;
 
+        for (Task task : tasks.getTasks()) {
             if (task.getTaskName().contains(keyword)) {
-                sb.append(i + 1).append(". ").append(task).append("\n");
-                found = true;
+                if (hasMatches) {
+                    sb.append("\n");
+                }
+                sb.append(displayIndex).append(". ").append(task);
+                hasMatches = true;
             }
+            displayIndex++;
         }
 
-        if (!found) {
+        if (!hasMatches) {
             return "No related findings...";
-        }
-
-        if (sb.length() > 0 && sb.charAt(sb.length() - 1) == '\n') {
-            sb.deleteCharAt(sb.length() - 1);
         }
         return sb.toString();
     }
 }
-
