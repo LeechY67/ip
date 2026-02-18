@@ -10,6 +10,8 @@ public class Deadline extends Task {
 
     public Deadline(String taskName, String by) throws BlondeBlazerException {
         super(taskName);
+        assert by != null : "Deadline date should not be null";
+
         try {
             this.by = LocalDate.parse(by.trim());
         } catch (Exception e) {
