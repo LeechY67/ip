@@ -5,7 +5,6 @@ import seedu.blondeblazer.storage.Storage;
 import seedu.blondeblazer.task.Deadline;
 import seedu.blondeblazer.task.Task;
 import seedu.blondeblazer.task.TaskList;
-import seedu.blondeblazer.ui.Ui;
 
 public class DeadlineCommand extends Command {
     private final String desc;

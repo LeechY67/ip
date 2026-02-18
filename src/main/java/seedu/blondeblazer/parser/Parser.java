@@ -17,9 +17,10 @@ import seedu.blondeblazer.command.UnmarkCommand;
  * Parses user input and returns the corresponding {@link Command}.
  *
  * <p>The {@code Parser} is responsible for interpreting the user's input string and
- * determining which {@code Command} should be executed.</p>
+ * determining which {@code Command} should be executed.</p >
  */
 public class Parser {
+
     /**
      * Parses the full user input and returns the proper {@code Command}.
      *
@@ -28,40 +29,49 @@ public class Parser {
      * @throws BlondeBlazerException If the input does not match with any command.
      */
     public static Command parse(String fullCommand) throws BlondeBlazerException {
-        assert fullCommand != null : "Input command should bot be null";
-        String input = fullCommand == null ? "" : fullCommand.trim();
+        assert fullCommand != null : "Input command should not be null";
 
-        if (input.equals("bye")) {
+        String input = fullCommand.trim();
+        if (input.isEmpty()) {
+            throw new BlondeBlazerException("Empty command.");
+        }
+
+        String[] parts = input.split("\\s+", 2);
+        String commandWord = parts[0];
+
+        switch (commandWord) {
+        case "bye":
             return new ByeCommand();
-        }
-        if (input.equals("list")) {
-            return new ListCommand();
-        }
-        if (input.startsWith("find")) {
-            return new FindCommand(input);
-        }
-        if (input.startsWith("mark")) {
-            return new MarkCommand(input);
-        }
-        if (input.startsWith("unmark")) {
-            return new UnmarkCommand(input);
-        }
-        if (input.startsWith("todo")) {
-            return new ToDoCommand(input);
-        }
-        if (input.startsWith("deadline")) {
-            return new DeadlineCommand(input);
-        }
-        if (input.startsWith("event")) {
-            return new EventCommand(input);
-        }
-        if (input.startsWith("delete")) {
-            return new DeleteCommand(input);
-        }
-        if (input.startsWith("on")) {
-            return new OnCommand(input);
-        }
 
-        throw new BlondeBlazerException("Come on, I don't even know what does this mean!");
+        case "list":
+            return new ListCommand();
+
+        case "find":
+            return new FindCommand(input);
+
+        case "mark":
+            return new MarkCommand(input);
+
+        case "unmark":
+            return new UnmarkCommand(input);
+
+        case "todo":
+            return new ToDoCommand(input);
+
+        case "deadline":
+            return new DeadlineCommand(input);
+
+        case "event":
+            return new EventCommand(input);
+
+        case "delete":
+            return new DeleteCommand(input);
+
+        case "on":
+            return new OnCommand(input);
+
+        default:
+            throw new BlondeBlazerException("Come on, I don't even know what does this " + commandWord + " mean!");
+        }
     }
 }

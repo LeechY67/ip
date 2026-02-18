@@ -3,7 +3,6 @@ package seedu.blondeblazer.command;
 import seedu.blondeblazer.BlondeBlazerException;
 import seedu.blondeblazer.storage.Storage;
 import seedu.blondeblazer.task.TaskList;
-import seedu.blondeblazer.ui.Ui;
 
 /**
  * Represents a command to be executed by the application.

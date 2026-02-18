@@ -4,7 +4,6 @@ import seedu.blondeblazer.BlondeBlazerException;
 import seedu.blondeblazer.storage.Storage;
 import seedu.blondeblazer.task.Task;
 import seedu.blondeblazer.task.TaskList;
-import seedu.blondeblazer.ui.Ui;
 
 /**
  * Represents a command that deletes the indicated task.
