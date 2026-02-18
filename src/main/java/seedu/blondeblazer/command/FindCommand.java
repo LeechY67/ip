@@ -18,10 +18,8 @@ public class FindCommand extends Command {
             throw new BlondeBlazerException("Please provide a keyword to find.");
         }
 
-        // Accept both "find xxx" and "xxx"
         String[] parts = trimmed.split("\\s+", 2);
         if (parts.length == 1) {
-            // maybe just keyword, or just "find"
             if ("find".equals(parts[0])) {
                 throw new BlondeBlazerException("Please provide a keyword to find.");
             }
@@ -29,7 +27,6 @@ public class FindCommand extends Command {
             return;
         }
 
-        // parts.length == 2
         if ("find".equals(parts[0])) {
             String k = parts[1].trim();
             if (k.isEmpty()) {
@@ -37,7 +34,6 @@ public class FindCommand extends Command {
             }
             this.keyword = k;
         } else {
-            // if user passed keyword with spaces, keep the rest
             this.keyword = parts[1].trim().isEmpty() ? parts[0] : trimmed;
         }
     }
