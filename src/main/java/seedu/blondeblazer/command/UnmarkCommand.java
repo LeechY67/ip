@@ -21,7 +21,7 @@ public class UnmarkCommand extends Command {
         Task t = tasks.getTasks().get(index);
         storage.save(tasks.getTasks());
 
-        return "Nice, I've marked this task as done!\n"
+        return "OK, I've marked this task as not done.\n"
                 + (index + 1) + ". " + t;
     }
 

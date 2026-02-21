@@ -32,7 +32,7 @@ public class NoteCommand extends Command {
         tasks.add(note);
         storage.save(tasks.getTasks());
 
-        return  "Got it, I've added this task:\n"
+        return  "Got it, I've added this note:\n"
                 + note + "\n"
                 + "Now you have " + tasks.size() + " tasks in the list.";
     }
