@@ -14,6 +14,12 @@ import seedu.blondeblazer.task.Note;
 import seedu.blondeblazer.task.Task;
 import seedu.blondeblazer.task.ToDo;
 
+/**
+ * Handles loading and saving of tasks to persistent storage.
+ *
+ * <p>Tasks are serialized into a simple delimited text format and written to disk,
+ * and reconstructed back into {@link Task} objects when loading.</p >
+ */
 public class Storage {
     private static final String DELIMITER_REGEX = "\\s*\\|\\|\\s*";
     private static final String DONE_TRUE = "1";
@@ -21,10 +27,21 @@ public class Storage {
 
     private final Path dataPath;
 
+    /**
+     * Constructs a {@code Storage} instance with the given file path.
+     *
+     * @param filePath Path to the data file used for persistence.
+     */
     public Storage(String filePath) {
         this.dataPath = Paths.get(filePath);
     }
 
+    /**
+     * Loads tasks from the data file.
+     *
+     * @return An {@link ArrayList} of reconstructed tasks. Returns an empty list if the file does not exist.
+     * @throws BlondeBlazerException If an I/O error occurs while reading the file.
+     */
     public ArrayList<Task> load() throws BlondeBlazerException {
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -55,6 +72,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the given tasks to the data file.
+     *
+     * @param tasks List of tasks to persist.
+     * @throws BlondeBlazerException If an I/O error occurs while writing the file.
+     */
     public void save(ArrayList<Task> tasks) throws BlondeBlazerException {
         try {
             Path parent = dataPath.getParent();
@@ -72,6 +95,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Encodes a {@link Task} into its storage string representation.
+     *
+     * @param t Task to encode.
+     * @return Encoded string representation of the task.
+     */
     private String encodeTask(Task t) {
         String done = t.isDone() ? DONE_TRUE : "0";
 
@@ -90,6 +119,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Decodes a line from storage into a {@link Task}.
+     *
+     * @param line Raw line from the data file.
+     * @return Reconstructed task.
+     * @throws BlondeBlazerException If the line is malformed or contains unknown task type.
+     */
     private Task decodeTask(String line) throws BlondeBlazerException {
         String[] parts = line.split(DELIMITER_REGEX);
         if (parts.length < MIN_PARTS_FOR_TASK) {

@@ -6,6 +6,13 @@ import seedu.blondeblazer.task.Task;
 import seedu.blondeblazer.task.TaskList;
 import seedu.blondeblazer.task.ToDo;
 
+/**
+ * Represents a command that adds a todo task to the task list.
+ * <p>
+ * The input for this command should include a non-empty description after the {@code todo} keyword.
+ * The created todo task will be added to the task list and saved to storage.
+ * </p >
+ */
 public class ToDoCommand extends Command {
     private final String description;
 

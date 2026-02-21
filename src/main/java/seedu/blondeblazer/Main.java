@@ -7,7 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import seedu.blondeblazer.ui.MainWindow;
+import seedu.blondeblazer.gui.MainWindow;
 
 /**
  * A GUI for BlondeBlazer using FXML.

@@ -6,8 +6,11 @@ import seedu.blondeblazer.task.Note;
 import seedu.blondeblazer.task.TaskList;
 
 /**
- * Adds a note (Category D extension).
- * Usage: note <text>
+ * Represents a command that adds a note to the task list.
+ * <p>
+ * The input for this command should include the note text after the {@code note} keyword.
+ * The created note will be added to the task list and saved to storage.
+ * </p >
  */
 public class NoteCommand extends Command {
     private static final String COMMAND_WORD = "note";

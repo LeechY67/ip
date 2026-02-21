@@ -4,6 +4,11 @@ import seedu.blondeblazer.storage.Storage;
 import seedu.blondeblazer.task.Task;
 import seedu.blondeblazer.task.TaskList;
 
+/**
+ * Represents a command to list all tasks.
+ *
+ * <p>Displays all tasks currently stored in the task list.</p >
+ */
 public class ListCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {

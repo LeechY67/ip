@@ -4,7 +4,13 @@ import seedu.blondeblazer.BlondeBlazerException;
 import seedu.blondeblazer.storage.Storage;
 import seedu.blondeblazer.task.Task;
 import seedu.blondeblazer.task.TaskList;
-
+/**
+ * Represents a command that marks a task as done.
+ * <p>
+ * The input for this command should specify the task index (1-based) to be marked.
+ * The task list will be updated and the changes will be saved to storage.
+ * </p >
+ */
 public class MarkCommand extends Command {
     private final int index;
 

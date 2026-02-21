@@ -8,9 +8,21 @@ import seedu.blondeblazer.task.Deadline;
 import seedu.blondeblazer.task.Task;
 import seedu.blondeblazer.task.TaskList;
 
+/**
+ * Represents a command that lists all deadline tasks occurring on a specified date.
+ * <p>
+ * The input for this command should include a date in the format YYYY-MM-DD.
+ * Only {@link seedu.blondeblazer.task.Deadline} tasks with a matching due date will be shown.
+ * </p >
+ */
 public class OnCommand extends Command {
     private final LocalDate targetDate;
-
+    /**
+     * Constructs an {@code OnCommand} with the user input.
+     *
+     * @param input Full user input.
+     * @throws BlondeBlazerException If the date is missing or has an invalid format.
+     */
     public OnCommand(String input) throws BlondeBlazerException {
         if (input.length() <= 3) {
             throw new BlondeBlazerException("blondeblazer.command.Command 'on' should be followed with a date.");
@@ -24,6 +36,13 @@ public class OnCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command to list deadlines on the target date.
+     *
+     * @param tasks Current task list.
+     * @param storage Storage component (not used by this command).
+     * @return A user-facing message showing matching deadlines, if any.
+     */
     @Override
     public String execute(TaskList tasks, Storage storage) {
         StringBuilder sb = new StringBuilder();

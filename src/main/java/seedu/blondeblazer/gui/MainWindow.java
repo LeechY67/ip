@@ -1,4 +1,4 @@
-package seedu.blondeblazer.ui;
+package seedu.blondeblazer.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

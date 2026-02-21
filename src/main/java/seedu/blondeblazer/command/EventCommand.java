@@ -5,12 +5,23 @@ import seedu.blondeblazer.storage.Storage;
 import seedu.blondeblazer.task.Event;
 import seedu.blondeblazer.task.Task;
 import seedu.blondeblazer.task.TaskList;
-
+/**
+ * Represents a command that adds an event task to the task list.
+ * <p>
+ * The input for this command should include a description, a start time (prefixed by {@code /from}),
+ * and an end time (prefixed by {@code /to}). The created event will be added to the task list and saved.
+ * </p >
+ */
 public class EventCommand extends Command {
     private final String desc;
     private final String from;
     private final String to;
-
+    /**
+     * Constructs an {@code EventCommand} with the user input.
+     *
+     * @param input Full user input.
+     * @throws BlondeBlazerException If the description, start time, or end time is missing.
+     */
     public EventCommand(String input) throws BlondeBlazerException {
         if (input.length() <= 6) {
             throw new BlondeBlazerException(
@@ -36,6 +47,14 @@ public class EventCommand extends Command {
         to = p2[1].trim();
     }
 
+    /**
+     * Executes the command to add an event task.
+     *
+     * @param tasks Current task list.
+     * @param storage Storage component to persist changes.
+     * @return A user-facing message confirming the task has been added.
+     * @throws BlondeBlazerException If saving the updated task list fails.
+     */
     @Override
     public String execute(TaskList tasks, Storage storage) throws BlondeBlazerException {
         Task t = new Event(desc, from, to);

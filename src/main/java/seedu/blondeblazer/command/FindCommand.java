@@ -4,10 +4,21 @@ import seedu.blondeblazer.BlondeBlazerException;
 import seedu.blondeblazer.storage.Storage;
 import seedu.blondeblazer.task.Task;
 import seedu.blondeblazer.task.TaskList;
-
+/**
+ * Represents a command that finds and lists tasks whose names contain a given keyword.
+ * <p>
+ * The input for this command should include a keyword to search for.
+ * Tasks with task names containing the keyword will be listed in their original order.
+ * </p >
+ */
 public class FindCommand extends Command {
     private final String keyword;
-
+    /**
+     * Constructs a {@code FindCommand} with the user input.
+     *
+     * @param input Full user input.
+     * @throws BlondeBlazerException If the keyword is missing.
+     */
     public FindCommand(String input) throws BlondeBlazerException {
         if (input == null) {
             throw new BlondeBlazerException("Find keyword cannot be null.");
@@ -38,6 +49,13 @@ public class FindCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command to find tasks matching the keyword.
+     *
+     * @param tasks Current task list.
+     * @param storage Storage component (not used by this command).
+     * @return A user-facing message listing matching tasks, if any.
+     */
     @Override
     public String execute(TaskList tasks, Storage storage) {
         StringBuilder sb = new StringBuilder();

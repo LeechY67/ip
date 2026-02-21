@@ -1,14 +1,11 @@
-package seedu.blondeblazer.ui;
+
+package seedu.blondeblazer.gui;
 
 import seedu.blondeblazer.task.Task;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
-public class Ui {
+public class TextMessage {
     private static final String LINE =
             "----------------------------------------------------------------------------------------";
-    private final Scanner scanner = new Scanner(System.in);
 
     public void showWelcome() {
         System.out.println(LINE);
@@ -21,10 +18,6 @@ public class Ui {
         System.out.println(LINE);
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(LINE);
-    }
-
-    public String readCommand() {
-        return scanner.nextLine();
     }
 
     public void showLine() {
@@ -85,3 +78,4 @@ public class Ui {
         System.out.println("No related findings...");
     }
 }
+

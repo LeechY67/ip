@@ -1,4 +1,4 @@
-package seedu.blondeblazer.ui;
+package seedu.blondeblazer.gui;
 
 import java.io.IOException;
 import java.util.Collections;
