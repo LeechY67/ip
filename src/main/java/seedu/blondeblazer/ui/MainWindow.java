@@ -25,20 +25,25 @@ public class MainWindow extends AnchorPane {
     private BlondeBlazer blondeBlazer;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaBlondeBlazer.png"));
+    private Image bbImage = new Image(this.getClass().getResourceAsStream("/images/DaBlondeBlazer.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    /** Injects the Duke instance */
     public void setBlondeBlazer(BlondeBlazer b) {
         blondeBlazer = b;
+        dialogContainer.getChildren().add(
+                DialogBox.getBBDialog(
+                        "Hi!! I am BlondeBlazer!\nWhat can I do for you?",
+                        bbImage
+                )
+        );
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing BlondeBlazer's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
@@ -47,7 +52,7 @@ public class MainWindow extends AnchorPane {
         String response = blondeBlazer.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getBBDialog(response, bbImage)
         );
         userInput.clear();
 
