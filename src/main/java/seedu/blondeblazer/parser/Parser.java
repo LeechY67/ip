@@ -31,42 +31,49 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws BlondeBlazerException {
         assert fullCommand != null : "Input command should not be null";
-
+        // AI-assisted: Refactored to parse the command word once (indexOf + substring),
+        // avoiding multiple startsWith checks and improving readability/efficiency.
+        // Also, fixing the bug of recording wrong input when user types command without 'SPACE'
         String input = fullCommand.trim();
+        if (input.isEmpty()) {
+            throw new BlondeBlazerException("Come on, I don't even know what does this  mean!");
+        }
 
-        if (input.equals("bye")) {
+        int firstSpace = input.indexOf(' ');
+        String commandWord = (firstSpace == -1) ? input : input.substring(0, firstSpace);
+        boolean hasArgs = firstSpace != -1 && !input.substring(firstSpace + 1).trim().isEmpty();
+
+        switch (commandWord) {
+        case "bye":
+            if (hasArgs) {
+                break;
+            }
             return new ByeCommand();
-        }
-        if (input.equals("list")) {
+        case "list":
+            if (hasArgs) {
+                break;
+            }
             return new ListCommand();
-        }
-        if (input.startsWith("find")) {
+        case "find":
             return new FindCommand(input);
-        }
-        if (input.startsWith("mark")) {
+        case "mark":
             return new MarkCommand(input);
-        }
-        if (input.startsWith("unmark")) {
+        case "unmark":
             return new UnmarkCommand(input);
-        }
-        if (input.startsWith("todo")) {
+        case "todo":
             return new ToDoCommand(input);
-        }
-        if (input.startsWith("deadline")) {
+        case "deadline":
             return new DeadlineCommand(input);
-        }
-        if (input.startsWith("event")) {
+        case "event":
             return new EventCommand(input);
-        }
-        if (input.startsWith("delete")) {
+        case "delete":
             return new DeleteCommand(input);
-        }
-        if (input.startsWith("on")) {
+        case "on":
             return new OnCommand(input);
-        }
-
-        if (input.startsWith("note")) {
+        case "note":
             return new NoteCommand(input);
+        default:
+            break;
         }
 
         throw new BlondeBlazerException("Come on, I don't even know what does this " + input + " mean!");
